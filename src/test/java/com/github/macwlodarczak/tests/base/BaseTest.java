@@ -1,4 +1,4 @@
-package com.github.macwlodarczak.base;
+package com.github.macwlodarczak.tests.base;
 
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -10,7 +10,7 @@ public class BaseTest {
     private static final int port = 8081;
 
     @BeforeAll
-    public static void setUp() {
+    public static final void setUp() {
         RestAssured.baseURI = baseURI;
         RestAssured.port = port;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
