@@ -1,6 +1,6 @@
 # 🚀 REST API Test Automation Framework
 
-Automated API testing framework built with **Java**, **RestAssured**, and **JUnit 5**. Designed to validate RESTful services using a clean, modular architecture with dedicated API clients, reusable request/response specifications, and multi-environment configuration support.
+Automated API testing framework built with **Java**, **RestAssured**, and **JUnit 6**. Designed to validate RESTful services using a clean, modular architecture with dedicated API clients, reusable request/response specifications, and multi-environment configuration support.
 
 ---
 
@@ -8,9 +8,8 @@ Automated API testing framework built with **Java**, **RestAssured**, and **JUni
 
 * **Language:** Java
 * **API Testing Library:** RestAssured
-* **Test Runner:** JUnit 5
-* **Build Tool:** Maven *(lub Gradle – dopasuj w razie potrzeby)*
-* **Serialization/Deserialization:** Jackson / Gson
+* **Test Runner:** JUnit 6
+* **Build Tool:** Maven
 
 ---
 

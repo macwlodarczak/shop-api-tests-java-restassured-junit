@@ -20,6 +20,5 @@ public class UserClient {
                 .statusCode(200)
                 .extract()
                 .response();
-
     }
 }
