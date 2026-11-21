@@ -7,11 +7,12 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class BaseTest {
     private static final String baseURI = "http://192.168.1.190";
+    private static final int port = 8081;
 
     @BeforeAll
     public static void setUp() {
         RestAssured.baseURI = baseURI;
-        RestAssured.port = 8081;
+        RestAssured.port = port;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 }
