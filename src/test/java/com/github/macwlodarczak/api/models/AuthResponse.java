@@ -10,6 +10,10 @@ public class AuthResponse extends UserResponse{
     public AuthResponse() {
     }
 
+    public AuthResponse(String token) {
+        this.token = token;
+    }
+
     public AuthResponse(String refreshToken, String token) {
         this.refreshToken = refreshToken;
         this.token = token;

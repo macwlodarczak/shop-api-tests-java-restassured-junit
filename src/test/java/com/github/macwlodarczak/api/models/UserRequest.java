@@ -6,9 +6,18 @@ public class UserRequest {
     private String firstName;
     private String lastName;
     private String email;
+    private String token;
 
     public UserRequest() {
     }
+
+//    public UserRequest(String username, String token) {
+//        this.username = username;
+//        this.token = token;
+//    }
+
+
+
 
     public UserRequest(String username, String password) {
         this.username = username;
@@ -70,4 +79,11 @@ public class UserRequest {
         this.email = email;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

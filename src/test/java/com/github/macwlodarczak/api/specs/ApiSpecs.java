@@ -16,4 +16,13 @@ public class ApiSpecs {
                 .addFilter(new ResponseLoggingFilter())
                 .build();
     }
+    public static RequestSpecification authRequestSpecs(String token) {
+        return new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .setAccept(ContentType.JSON)
+                .addHeader("Authorization", " Bearer " + token)
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
+                .build();
+    }
 }

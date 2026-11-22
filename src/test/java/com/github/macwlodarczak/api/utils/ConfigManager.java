@@ -23,4 +23,8 @@ public class ConfigManager {
     public static String getProperty(String key) {
         return properties.getProperty(key);
     }
+
+    public static void setToken(String token) {
+        properties.setProperty("token", token);
+    }
 }
