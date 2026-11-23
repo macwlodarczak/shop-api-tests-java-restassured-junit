@@ -1,9 +1,9 @@
 package com.github.macwlodarczak.tests.users;
 
-import com.github.macwlodarczak.api.endpoints.AuthUser;
-import com.github.macwlodarczak.api.endpoints.UsersEndpoint;
+import com.github.macwlodarczak.api.endpoints.UsersSignin;
+import com.github.macwlodarczak.api.endpoints.UsersEndpoints;
 import com.github.macwlodarczak.api.models.AuthResponse;
-import com.github.macwlodarczak.api.models.UserRequest;
+import com.github.macwlodarczak.api.models.UserRequestDto;
 import com.github.macwlodarczak.api.models.UserResponse;
 import com.github.macwlodarczak.api.utils.ConfigManager;
 import com.github.macwlodarczak.tests.base.BaseTest;
@@ -13,16 +13,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UsersTests extends BaseTest {
-    private final AuthUser userClient = new AuthUser();
-//    private UserRequest user;
+//    private final AuthUser userClient = new AuthUser();
 
     @Test
     public void should_return_JWT_token_When_admin_logs_in() {
 //create UserRequest object using admin credentials from config.local.properties file
-        UserRequest user = new UserRequest(ConfigManager.getProperty("admin.username"),
+        UserRequestDto user = new UserRequestDto(ConfigManager.getProperty("admin.username"),
                 ConfigManager.getProperty("admin.password"));
 
-        Response response = userClient.signinUser(user);
+        Response response = new UsersSignin().logUserIn(user);
 
         AuthResponse authResponse = response.as(AuthResponse.class);
         String token = authResponse.getToken();
@@ -37,10 +36,10 @@ public class UsersTests extends BaseTest {
     @Test
     public void should_return_user_data_When_admin_logs_in() {
 //create UserRequest object using admin credentials from config.local.properties file
-        UserRequest user = new UserRequest(ConfigManager.getProperty("admin.username"),
+        UserRequestDto user = new UserRequestDto(ConfigManager.getProperty("admin.username"),
                 ConfigManager.getProperty("admin.password"));
 
-        Response response = userClient.signinUser(user);
+        Response response = new UsersSignin().logUserIn(user);
 
         AuthResponse authResponse = response.as(AuthResponse.class);
 
@@ -49,22 +48,28 @@ public class UsersTests extends BaseTest {
         assertEquals("Slawomir", authResponse.getFirstName(), "firstname should be Slawomir");
         assertEquals("Radzyminski", authResponse.getLastName(), "lastname should be Radzyminski");
         assertEquals("awesome@testing.com", authResponse.getEmail(), "email should be awesome@testing.com");
-        assertEquals("ROLE_ADMIN, ", authResponse.getUserRoles(), "getRolesError");
+        assertEquals("ROLE_ADMIN", authResponse.getUserRoles().trim().strip(), "roles should be ROLE_ADMIN");
     }
 
     @Test
     public void should_return_user_data_When_get_user_by_username() {
 
-        UserRequest user = new UserRequest(ConfigManager.getProperty("admin.username"),
+        UserRequestDto user = new UserRequestDto(ConfigManager.getProperty("admin.username"),
                 ConfigManager.getProperty("admin.password"));
-        Response response = new AuthUser().signinUser(user);
+        Response response = new UsersSignin().logUserIn(user);
         AuthResponse auth = response.as(AuthResponse.class);
         String token = auth.getToken();
 
-        Response resp = new UsersEndpoint().getUserByUsername(token);
+        Response resp = new UsersEndpoints().getUserByUsername(token);
 
         UserResponse ur = resp.as(UserResponse.class);
 
         assertEquals("admin", ur.getUsername(), "username should be admin");
+        assertEquals(1, ur.getId(), "id should be 1");
+        assertEquals("ROLE_ADMIN", ur.getUserRoles().trim().strip(), "roles should be ROLE_ADMIN");
+        assertEquals("awesome@testing.com", ur.getEmail(), "email should be awesome@testing.com");
+        assertEquals("Slawomir", ur.getFirstName(), "firstName should be Slawomir");
+        assertEquals("Radzyminski", ur.getLastName(), "lastName should be Radzyminski");
+
     }
 }

@@ -3,7 +3,7 @@ package com.github.macwlodarczak.api.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserResponse extends UserRequest{
+public class UserResponse extends UserRequestDto {
     private String[] roles;
     private int id;
 
@@ -20,10 +20,6 @@ public class UserResponse extends UserRequest{
         this.id = id;
         this.roles = roles;
     }
-
-//    public UserResponse(String username) {
-//        super(username);
-//    }
 
     public int getId() {
         return id;
@@ -45,7 +41,7 @@ public class UserResponse extends UserRequest{
         String [] rolesArray = getRoles();
         String roles = "";
         for (int i = 0; i < rolesArray.length; i++) {
-            roles = rolesArray[i] + ", ";
+            roles = rolesArray[i] + " ";
         }
         return roles;
     }

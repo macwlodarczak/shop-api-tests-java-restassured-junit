@@ -1,6 +1,6 @@
 package com.github.macwlodarczak.api.models;
 
-public class UserRequest {
+public class UserRequestDto {
     private String username;
     private String password;
     private String firstName;
@@ -8,30 +8,22 @@ public class UserRequest {
     private String email;
     private String token;
 
-    public UserRequest() {
+    public UserRequestDto() {
     }
 
-//    public UserRequest(String username, String token) {
-//        this.username = username;
-//        this.token = token;
-//    }
-
-
-
-
-    public UserRequest(String username, String password) {
+    public UserRequestDto(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public UserRequest(String email, String firstName, String lastName) {
+    public UserRequestDto(String email, String firstName, String lastName) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public UserRequest(String username, String email, String password,
-                       String firstname, String lastName) {
+    public UserRequestDto(String username, String email, String password,
+                          String firstname, String lastName) {
         this(username, password);
         this.email = email;
         this.firstName = firstname;
